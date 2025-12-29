@@ -1,1 +1,0 @@
-// this project is regarding battery manegment assistance.

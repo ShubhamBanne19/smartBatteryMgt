@@ -1,0 +1,61 @@
+<form [formGroup]="form" (ngSubmit)="calculate()">
+  <div style="grid-column: 1 / -1; font-size:12px; color:var(--bms-muted)">
+    <span>chemistries: {{ chemistries.length }}</span> ·
+    <span>manufacturers: {{ manufacturers.length }}</span> ·
+    <span>formFactors: {{ formFactors.length }}</span> ·
+    <span>cellModels: {{ cellModels.length }}</span>
+  </div>
+
+  <select formControlName="chemistry">
+    <option value="">-- Select chemistry --</option>
+    <option *ngFor="let c of chemistries" [value]="c.id">
+      {{ c.label }}
+    </option>
+  </select>
+
+  <select formControlName="manufacturer">
+    <option value="">-- Select manufacturer --</option>
+    <option *ngFor="let m of manufacturers" [value]="m.id">
+      {{ m.label }}
+    </option>
+  </select>
+
+  <select formControlName="formFactor">
+    <option value="">-- Select form factor --</option>
+    <option *ngFor="let f of formFactors" [value]="f.id">
+      {{ f.id }}
+    </option>
+  </select>
+
+  <select formControlName="cellModel">
+    <option value="">-- Select cell model --</option>
+    <option *ngFor="let m of cellModels" [value]="m.id">
+      {{ m.id }}
+    </option>
+  </select>
+
+  <input type="number" formControlName="series" placeholder="Series (cells in series)" />
+  <input type="number" formControlName="parallel" placeholder="Parallel (strings)" />
+
+  <button type="submit">Calculate</button>
+
+  <div *ngIf="errors.length" style="grid-column:1 / -1; color: #b91c1c; font-size:13px">
+    <div *ngFor="let e of errors">{{ e }}</div>
+  </div>
+
+  <div *ngIf="derivedResult" style="grid-column:1 / -1; margin-top:12px">
+    <strong>Derived</strong>
+    <div>Battery Voltage (V): {{ derivedResult.batteryVoltageV }}</div>
+    <div>Battery Capacity (Ah): {{ derivedResult.batteryCapacityAh }}</div>
+    <div>Total Cells: {{ derivedResult.totalCells }}</div>
+    <div>Energy per Cell (Wh): {{ derivedResult.energyWhPerCell }}</div>
+  </div>
+
+  <div *ngIf="pricingDecision" style="grid-column:1 / -1; margin-top:8px">
+    <strong>Pricing</strong>
+    <div>Matched tier: {{ pricingDecision.matchedTier | json }}</div>
+    <div>Price (USD/kWh): {{ pricingDecision.pricePerKwh }}</div>
+    <div>Battery Energy (kWh): {{ pricingDecision.batteryEnergyKwh }}</div>
+    <div>Estimated cost (USD): {{ pricingDecision.finalCostUsd | number:'1.2-2' }}</div>
+  </div>
+</form>

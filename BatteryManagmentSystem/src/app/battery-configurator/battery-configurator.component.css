@@ -1,0 +1,205 @@
+
+
+:host {
+  /* Design tokens (easy to override from global theme) */
+  --bms-primary: #0b63ff;
+  --bms-accent: #06b6d4;
+  --bms-bg: #ffffff;
+  --bms-surface: #f7f9fc;
+  --bms-border: #e6edf7;
+  --bms-text: #0f1724;
+  --bms-muted: #6b7280;
+  --bms-error: #b91c1c;
+  --bms-success: #063a12;
+  --bms-radius: 10px;
+  --bms-gap: 16px;
+  --bms-input-padding: 10px 12px;
+  --bms-shadow: 0 8px 24px rgba(12,40,80,0.06);
+
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: var(--bms-gap);
+  align-items: start;
+  width: 100%;
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--bms-text);
+  background: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Meta / counts row */
+:host > form > div:first-child {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--bms-muted);
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--bms-border);
+  margin-bottom: 8px;
+}
+
+/* Base controls */
+:host select,
+:host input[type="number"] {
+  width: 100%;
+  padding: var(--bms-input-padding);
+  border-radius: var(--bms-radius);
+  border: 1px solid var(--bms-border);
+  background: linear-gradient(180deg, var(--bms-bg), var(--bms-surface));
+  color: var(--bms-text);
+  font-size: 14px;
+  line-height: 20px;
+  box-sizing: border-box;
+  transition: box-shadow .12s ease, border-color .12s ease, transform .06s ease;
+  min-height: 44px;
+  appearance: none;
+  margin: 1rem;
+}
+
+/* Placeholder option */
+:host select option[value=""] {
+  color: var(--bms-muted);
+}
+
+/* Custom select arrow */
+:host select {
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.0)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='14' height='14' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-position: center right 12px, center right 12px;
+  background-size: 12px, 12px;
+  padding-right: 44px;
+  margin: 1rem;
+}
+
+/* Remove number input spinners */
+:host input[type="number"]::-webkit-outer-spin-button,
+:host input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+:host input[type="number"] { -moz-appearance: textfield; }
+
+/* Focus and accessible focus-visible */
+:host select:focus,
+:host input[type="number"]:focus,
+:host button:focus {
+  outline: none;
+  border-color: var(--bms-primary);
+  box-shadow: 0 8px 28px rgba(11,99,255,0.08);
+  transform: translateY(-1px);
+}
+:host select:focus-visible,
+:host input[type="number"]:focus-visible,
+:host button:focus-visible {
+  box-shadow: 0 8px 24px rgba(11,99,255,0.12), 0 0 0 4px rgba(11,99,255,0.06);
+  border-color: var(--bms-primary);
+  border-width: 1px;
+  transform: none;
+}
+
+/* Button / primary action */
+:host button[type="submit"] {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: calc(var(--bms-radius) + 2px);
+  border: none;
+  background: linear-gradient(180deg, var(--bms-primary), rgba(6,40,140,0.9));
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: var(--bms-shadow);
+  transition: transform .08s ease, box-shadow .12s ease, opacity .12s ease;
+}
+:host button[type="submit"]:hover { transform: translateY(-2px); }
+:host button[type="submit"]:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(11,99,255,0.08); }
+:host button[type="submit"]:disabled { opacity: .6; cursor: not-allowed; box-shadow: none; }
+
+/* Error block styling (use .errors / .errors-list classes — add to template if possible) */
+.errors,
+:host .errors {
+  grid-column: 1 / -1;
+}
+.errors-list {
+  margin: 8px 0 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(185,28,28,0.06);
+  border: 1px solid rgba(185,28,28,0.12);
+  color: var(--bms-error);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.errors-list > div { margin: 6px 0; }
+
+/* Derived + Pricing cards */
+.result-card {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+.card {
+  background: linear-gradient(180deg, var(--bms-bg), var(--bms-surface));
+  border: 1px solid var(--bms-border);
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(8,20,40,0.04);
+  min-height: 68px;
+}
+.card strong { display: block; margin-bottom: 8px; font-size: 14px; color: var(--bms-text); }
+.card .line { font-size: 13px; color: var(--bms-muted); margin: 6px 0; }
+.card .value { font-weight: 700; color: var(--bms-text); font-size: 15px; }
+
+/* Pricing emphasis */
+.pricing-value { font-weight: 700; font-size: 1rem; color: var(--bms-text); }
+.estimated-cost { margin-top: 8px; font-size: 15px; color: var(--bms-success); font-weight: 700; }
+
+/* Utility */
+.full-width { grid-column: 1 / -1; }
+
+/* Responsive: collapse to single column on small screens */
+@media (max-width: 720px) {
+  :host { grid-template-columns: 1fr; padding: 16px; gap: 12px; }
+  :host select { padding-right: 36px; }
+  .result-card { grid-template-columns: 1fr; }
+  .card { padding: 12px; }
+}
+
+/* Reduced motion & high-contrast support */
+@media (prefers-reduced-motion: reduce) {
+  :host * { transition: none !important; animation: none !important; }
+}
+@media (prefers-contrast: more) {
+  :host select, :host input[type="number"], :host button { border-width: 2px; }
+}
+
+/* Minor accessibility helper: visually-hidden (use in future templates for labels) */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* End of component styles */
+

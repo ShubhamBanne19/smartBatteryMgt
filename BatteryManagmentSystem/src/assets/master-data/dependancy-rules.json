@@ -1,0 +1,24 @@
+{
+  "rules": [
+    {
+      "if": "batteryChemistry",
+      "then": "cellManufacturer",
+      "type": "FILTER"
+    },
+    {
+      "if": "cellManufacturer",
+      "then": "formFactor",
+      "type": "FILTER"
+    },
+    {
+      "if": "formFactor",
+      "then": "cellModel",
+      "type": "FILTER"
+    },
+    {
+      "if": "cellModel",
+      "then": ["capacityAh", "voltageV"],
+      "type": "DERIVE"
+    }
+  ]
+}

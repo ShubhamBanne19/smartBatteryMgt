@@ -1,0 +1,8 @@
+{
+  "formulas": {
+    "batteryVoltageV": "cellVoltageV * series",
+    "batteryCapacityAh": "cellCapacityAh * parallel",
+    "totalCells": "series * parallel",
+    "energyWhPerCell": "cellVoltageV * cellCapacityAh"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "validations": [
+    {
+      "field": "series",
+      "rule": "series > 0",
+      "message": "Series must be greater than zero"
+    },
+    {
+      "field": "parallel",
+      "rule": "parallel > 0",
+      "message": "Parallel must be greater than zero"
+    }
+  ]
+}
